@@ -3,12 +3,13 @@ from .views import views
 from .views import brand
 from .views import product_presentation
 
+app_name = "crud"
 urlpatterns = [
     path('', views.index, name='index'),
     
     path("brand/", brand.show, name="show_brand"),
     path("brand/get/", brand.show, name="get_brand"),
-    path("brand/create/", brand.show, name="create_brand"),
+    path("brand/create/", brand.create, name="create_brand"),
     path("brand/delete/", brand.show, name="delete_brand"),
     path("brand/update/", brand.show, name="update_brand"),
     

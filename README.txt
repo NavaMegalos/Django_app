@@ -1,0 +1,7 @@
+
+# DATABASE CONFIG 
+
+CREATE DATABASE products;
+CREATE USER user@localhost IDENTIFIED BY 'userpass';
+GRANT ALL PRIVILEGES ON namedb.* TO user@localhost;
+FLUSH PRIVILEGES;

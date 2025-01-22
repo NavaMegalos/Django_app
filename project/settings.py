@@ -39,7 +39,7 @@ DJANGO_APPS = [
 ]
 
 THIRD_APPS = [
-    
+    'bootstrap5',
 ]
 
 MY_APPS = [
