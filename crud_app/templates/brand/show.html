@@ -1,0 +1,24 @@
+{% include 'catalogos.html' %}
+{% block content %}
+
+{% if brands %}
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Nombre</td>
+            <td>Editar</td>
+            <td>Eliminar</td>
+        </tr>
+    </tbody>
+    
+</table>
+{% endif %}
+
+{% endblock content %}
