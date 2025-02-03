@@ -14,8 +14,16 @@
         {% for brand in brands %}
         <tr>
             <td>{{ brand.name }}</td>
-            <td aria-id="{{ brand.id }}">Editar</td>
-            <td aria-id="{{ brand.id }}">Eliminar</td>
+            <td>
+              <button class="btn-edit btn btn-outline-warning" aria-id="{{ brand.id }}">
+                Editar
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-outline-danger" aria-id="{{ brand.id }}">
+                Eliminar
+              </button>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
@@ -27,26 +35,7 @@
   + Nuevo
 </button>
 
-<!-- Modal -->
-<div class="modal fade" id="addNewBrand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Nueva Marca</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form method="POST" action="{% url 'crud:create_brand' %}">
-      <div class="modal-body">
-          {{ form }}
-          {% csrf_token %}
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <input type="submit" class="btn btn-primary" value="Agregar">
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
+{% include "brand/modals.html" %}
+{% include "brand/scripts.html" %}
 
 {% endblock content %}

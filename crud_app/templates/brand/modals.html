@@ -1,0 +1,43 @@
+<!-- Modal Create New Brand-->
+<div class="modal fade" id="addNewBrand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Nueva Marca</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="POST" action="{% url 'crud:create_brand' %}">
+      <div class="modal-body">
+          {{ form }}
+          {% csrf_token %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <input type="submit" class="btn btn-primary" value="Agregar">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal Edit Existing Brand-->
+<div class="modal fade" id="editExistingBrand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Nueva Marca</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="POST" action="{% url 'crud:update_brand' %}">
+      <div class="modal-body">
+        {% csrf_token %}
+        <input type="hidden" name="id_brand"/>
+        <input type="text" name="name_brand">
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <input type="submit" class="btn btn-primary" value="Editar">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

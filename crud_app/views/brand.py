@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.contrib import messages
 
@@ -15,8 +15,21 @@ def show(request):
 
 
 def get(request):
-    context = {}
-    return render(request, "brand/show.html", context)
+    if not request.GET:
+        return
+
+    data = {}
+    id = request.GET["id"]
+    try:
+        brand = Brand.objects.get(id=id)
+        data = {
+            "id": brand.id,
+            "name": brand.name,
+        }
+    except Brand.DoesNotExist:
+        data = {"error": "Brand not Found"}
+
+    return JsonResponse(data)
 
 
 def create(request):
