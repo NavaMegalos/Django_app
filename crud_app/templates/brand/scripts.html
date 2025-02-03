@@ -1,20 +1,36 @@
 <script>
-  $(document).ready(function() {
-    $(".btn-edit").click(function(){
-      let idBrand = $(this).attr('aria-id');
+  $(document).ready(function(){
+    $(".btn-edit").click(function () {
+      let idBrand = $(this).attr("aria-id");
 
       $.ajax({
-          url: "{% url 'crud:get_brand' %}",
-          type: 'GET',
-          data: {
-            'id': idBrand
-          },
-          dataType: 'json', // added data type
-          success: function(res) {
-              console.log(res);
-          }
-      });
+        url: "{% url 'crud:get_brand' %}",
+        type: "GET",
+        data: {
+          id: idBrand,
+        },
+        dataType: "json", // added data type
+        success: function (res) {
+          let inputId = $('.id_brand')
+          let inputName = $('.name_brand')
+          inputId.val(res.id).attr('value', res.id)
+          inputName.val(res.name).attr('value', res.name)
 
-    }); 
-  });
+          $('#editExistingBrand').attr('aria-hidden', 'false').modal('show');
+          $('#editExistingBrand .btn-close').focus();
+        },
+      })
+    })
+
+
+    // When closing the modal
+    $('#editExistingBrand').on('hidden.bs.modal', function () {
+      // Set aria-hidden to true when modal is closed
+      $('#editExistingBrand').attr('aria-hidden', 'true');
+      
+      // Optionally, focus on the element that opened the modal or somewhere logical
+      $('.btn-edit').focus();  // or another element, like the last focused element before opening
+    });
+  })
+
 </script>
