@@ -1,6 +1,7 @@
 {% include 'catalogos.html' %}
 {% block content %}
 
+<h2>Marcas</h2>
 {% if brands %}
 <table>
     <thead>
@@ -20,7 +21,7 @@
               </button>
             </td>
             <td>
-              <button class="btn btn-outline-danger" aria-id="{{ brand.id }}">
+              <button class="btn-delete btn btn-outline-danger" aria-id="{{ brand.id }}">
                 Eliminar
               </button>
             </td>
