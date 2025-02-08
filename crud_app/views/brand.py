@@ -49,10 +49,36 @@ def create(request):
 
 
 def delete(request):
-    context = {}
-    return render(request, "brand/show.html", context)
+    if not request.POST:
+        return
+
+    id = request.POST["id_brand"]
+    try:
+        brand = Brand.objects.get(id=id)
+        brand.delete()
+    except Exception as e:
+        msg = messages.add_message(request, messages.ERROR, f"error: {e}")
+        return HttpResponseRedirect(reverse("crud:show_brand"), msg)
+
+    msg = messages.add_message(request, messages.INFO, "El registro se ha eliminado!")
+    return HttpResponseRedirect(reverse("crud:show_brand"), msg)
 
 
 def update(request):
-    context = {}
-    return render(request, "brand/show.html", context)
+    if not request.POST:
+        return
+
+    id = request.POST["id_brand"]
+    name = request.POST["name_brand"]
+    try:
+        brand = Brand.objects.get(id=id)
+        brand.name = name
+        brand.save()
+    except Exception as e:
+        msg = messages.add_message(request, messages.ERROR, f"error: {e}")
+        return HttpResponseRedirect(reverse("crud:show_brand"), msg)
+
+    msg = messages.add_message(
+        request, messages.SUCCESS, "El registro se ha actualizado con exito!"
+    )
+    return HttpResponseRedirect(reverse("crud:show_brand"), msg)

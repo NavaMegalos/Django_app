@@ -1,49 +1,49 @@
 <script>
   $(document).ready(function(){
     $(".btn-edit").click(function () {
-      let idBrand = $(this).attr("aria-id");
+      let idPresentation = $(this).attr("aria-id");
 
       $.ajax({
-        url: "{% url 'crud:get_brand' %}",
+        url: "{% url 'crud:get_presentation' %}",
         type: "GET",
         data: {
-          id: idBrand,
+          id: idPresentation,
         },
         dataType: "json", // added data type
         success: function (res) {
-          let inputId = $('.id_brand')
-          let inputName = $('.name_brand')
+          let inputId = $('.id_presentation')
+          let inputName = $('.name_presentation')
           inputId.val(res.id).attr('value', res.id)
           inputName.val(res.name).attr('value', res.name)
 
-          $('#editExistingBrand').attr('aria-hidden', 'false').modal('show');
-          $('#editExistingBrand .btn-close').focus();
+          $('#editExistingPresentation').attr('aria-hidden', 'false').modal('show');
+          $('#editExistingPresentation .btn-close').focus();
         },
       })
     })
 
     $(".btn-delete").click(function () {
-      let idBrand = $(this).attr("aria-id");
-      let inputId = $('.id_brand')
+      let idPresentation = $(this).attr("aria-id");
+      let inputId = $('.id_presentation')
 
-      inputId.val(idBrand).attr('value', idBrand)
-      $('#deleteExistingBrand').attr('aria-hidden', 'false').modal('show');
-      $('#deleteExistingBrand .btn-close').focus();
+      inputId.val(idPresentation).attr('value', idPrand)
+      $('#deleteExistingPresentation').attr('aria-hidden', 'false').modal('show');
+      $('#deleteExistingPresentation .btn-close').focus();
     })
 
     // When closing the modal
-    $('#editExistingBrand').on('hidden.bs.modal', function () {
+    $('#editExistingPresentation').on('hidden.bs.modal', function () {
       // Set aria-hidden to true when modal is closed
-      $('#editExistingBrand').attr('aria-hidden', 'true');
+      $('#editExistingPresentation').attr('aria-hidden', 'true');
       
       // Optionally, focus on the element that opened the modal or somewhere logical
       $('.btn-edit').focus();  // or another element, like the last focused element before opening
     });
 
     // When closing the modal
-    $('#deleteExistingBrand').on('hidden.bs.modal', function () {
+    $('#deleteExistingPresentation').on('hidden.bs.modal', function () {
       // Set aria-hidden to true when modal is closed
-      $('#deleteExistingBrand').attr('aria-hidden', 'true');
+      $('#deleteExistingPresentation').attr('aria-hidden', 'true');
       
       // Optionally, focus on the element that opened the modal or somewhere logical
       $('.btn-delete').focus();  // or another element, like the last focused element before opening

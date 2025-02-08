@@ -1,0 +1,42 @@
+{% include 'catalogos.html' %}
+{% block content %}
+
+<h2>Presentaciones</h2>
+{% if presentations %}
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for presentation in presentations %}
+        <tr>
+            <td>{{ presentation.name }}</td>
+            <td>
+              <button class="btn-edit btn btn-outline-warning" aria-id="{{ presentation.id }}">
+                Editar
+              </button>
+            </td>
+            <td>
+              <button class="btn-delete btn btn-outline-danger" aria-id="{{ presentation.id }}">
+                Eliminar
+              </button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    
+</table>
+{% endif %}
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewPresentation">
+  + Nuevo
+</button>
+
+{% include "product_presentation/modals.html" %}
+{% include "product_presentation/scripts.html" %}
+
+{% endblock content %}

@@ -8,3 +8,7 @@ class BrandForm(ModelForm):
         model = Brand
         fields =  '__all__'
         
+class ProductPresentationForm(ModelForm):
+    class Meta:
+        model = ProductPresentation
+        fields =  '__all__'

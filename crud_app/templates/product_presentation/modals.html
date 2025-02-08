@@ -1,12 +1,12 @@
-<!-- Modal Create New Brand-->
-<div class="modal fade" id="addNewBrand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Create New Product Presentation-->
+<div class="modal fade" id="addNewPresentation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Nueva Marca</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Nueva Presentacion</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form method="POST" action="{% url 'crud:create_brand' %}">
+      <form method="POST" action="{% url 'crud:create_presentation' %}">
         <div class="modal-body">
             {{ form }}
             {% csrf_token %}
@@ -20,19 +20,19 @@
   </div>
 </div>
 
-<!-- Modal Edit Existing Brand-->
-<div class="modal fade" id="editExistingBrand" tabindex="-1" aria-labelledby="exampleModalLabel">
+<!-- Modal Edit Existing Product Presentation-->
+<div class="modal fade" id="editExistingPresentation" tabindex="-1" aria-labelledby="exampleModalLabel">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel"> Editar Marca </h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel"> Editar Presentacion </h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form method="POST" action="{% url 'crud:update_brand' %}">
+      <form method="POST" action="{% url 'crud:update_presentation' %}">
         <div class="modal-body">
           {% csrf_token %}
-          <input type="hidden" name="id_brand" class="id_brand"/>
-          <input type="text" name="name_brand" class="name_brand" />
+          <input type="hidden" name="id_presentation" class="id_presentation"/>
+          <input type="text" name="name_presentation" class="name_presentation" />
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
             <input type="submit" class="btn btn-primary" value="Editar">
@@ -43,18 +43,18 @@
   </div>
 </div>
 
-<!-- Modal Delete Existing Brand-->
-<div class="modal fade" id="deleteExistingBrand" tabindex="-1" aria-labelledby="exampleModalLabel">
+<!-- Modal Delete Existing Product Presentation-->
+<div class="modal fade" id="deleteExistingPresentation" tabindex="-1" aria-labelledby="exampleModalLabel">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5"> Eliminar Marca </h1>
+        <h1 class="modal-title fs-5"> Eliminar Presentation </h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form method="POST" action="{% url 'crud:delete_brand' %}">
+      <form method="POST" action="{% url 'crud:delete_presentation' %}">
         <div class="modal-body">
           {% csrf_token %}
-          <input type="hidden" name="id_brand" class="id_brand"/>
+          <input type="hidden" name="id_presentation" class="id_presentation"/>
           <p>Estas seguro que deseas <strong class="txt-danger danger">ELIMINAR</strong> este registro?.</p>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
