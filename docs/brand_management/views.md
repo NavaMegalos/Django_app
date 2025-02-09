@@ -1,11 +1,18 @@
-from django.shortcuts import render, redirect
-from django.http import JsonResponse
-from django.urls import reverse
-from django.contrib import messages
-from ..models import Brand
-from ..forms import BrandForm
+```markdown
+# Views: Brand Management
+
+This section documents the views used for **Brand Management** in the Django project.
+```
+
+## `show_brands`
 
 
+##### Description
+This view renders a list of all brands in the system and provides a form to create a new brand.
+
+###### Code:
+
+```python
 def show_brands(request):
     brands = Brand.objects.all()
     form = BrandForm()
@@ -13,24 +20,16 @@ def show_brands(request):
     return render(request, "brand/show.html", context)
 
 
-def get_brand(request):
-    if not request.GET or "id" not in request.GET:
-        return JsonResponse({"error": "Missing id parameter"}, status=400)
-
-    data = {}
-    id = request.GET["id"]
-    try:
-        brand = Brand.objects.get(id=id)
-        data = {
-            "id": brand.id,
-            "name": brand.name,
-        }
-    except Brand.DoesNotExist:
-        data = {"error": "Brand not found"}
-
-    return JsonResponse(data)
+```
+## `create_brand`
 
 
+##### Description
+This view handles the creation of a new brand. It validates the submitted form and, if valid, saves the brand to the database.
+
+
+###### Code:
+```python
 def create_brand(request):
     if request.method == "POST":
         form = BrandForm(request.POST)
@@ -40,31 +39,37 @@ def create_brand(request):
             return redirect(reverse("crud:show_brand"))
         else:
             messages.error(request, "Formulario inválido. Inténtalo de nuevo.")
-
-    # Handle GET method or form errors
     return render(request, "brand/show.html", {"form": form})
 
+```
+## `delete_brand`
 
+
+##### Description
+This view handles the deletion of a brand. It deletes the specified brand if it exists and returns a success message.
+
+
+###### Code:
+```python
 def delete_brand(request):
     if request.method == "POST" and "id_brand" in request.POST:
         id = request.POST["id_brand"]
         try:
             brand = Brand.objects.get(id=id)
             brand.delete()
-            # If the deletion is successful, send a success response
-            return JsonResponse(
-                {"success": True, "message": "El registro se ha eliminado!"}
-            )
+            return JsonResponse({"success": True, "message": "El registro se ha eliminado!"})
         except Brand.DoesNotExist:
-            # If the brand is not found, send an error response
             return JsonResponse({"success": False, "error": "Marca no encontrada."})
-        except Exception as e:
-            # Handle any other errors
-            return JsonResponse({"success": False, "error": f"Error: {e}"})
 
-    return JsonResponse({"success": False, "error": "Invalid request."})
+```
+## `update_brand`
 
 
+##### Description
+This view allows you to update the name of an existing brand. It takes the brand ID and the new name from the POST request and updates the corresponding `Brand` object in the database.
+
+###### Code:
+```python
 def update_brand(request):
     if (
         request.method == "POST"
@@ -84,3 +89,4 @@ def update_brand(request):
             messages.error(request, f"Error: {e}")
 
     return redirect(reverse("crud:show_brand"))
+```

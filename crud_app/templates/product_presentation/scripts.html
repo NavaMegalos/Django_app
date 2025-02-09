@@ -26,7 +26,7 @@
       let idPresentation = $(this).attr("aria-id");
       let inputId = $('.id_presentation')
 
-      inputId.val(idPresentation).attr('value', idPrand)
+      inputId.val(idPresentation).attr('value', idPresentation)
       $('#deleteExistingPresentation').attr('aria-hidden', 'false').modal('show');
       $('#deleteExistingPresentation .btn-close').focus();
     })

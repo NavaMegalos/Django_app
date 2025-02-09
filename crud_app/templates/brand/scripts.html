@@ -24,12 +24,45 @@
 
     $(".btn-delete").click(function () {
       let idBrand = $(this).attr("aria-id");
-      let inputId = $('.id_brand')
+      let inputId = $('.id_brand');
 
-      inputId.val(idBrand).attr('value', idBrand)
+      // Set the hidden input value for the brand ID
+      inputId.val(idBrand).attr('value', idBrand);
+
+      // Show the delete modal
       $('#deleteExistingBrand').attr('aria-hidden', 'false').modal('show');
       $('#deleteExistingBrand .btn-close').focus();
-    })
+    });
+
+    // When the user confirms the deletion
+    $("#deleteExistingBrand form").submit(function (e) {
+      e.preventDefault(); // Prevent the form from submitting traditionally
+
+      let brandId = $('.id_brand').val(); // Get the ID of the brand to delete
+
+      // Send the delete request via AJAX
+      $.ajax({
+        url: $(this).attr('action'), // Form action URL
+        type: 'POST',                // Use POST method
+        data: {
+          'id_brand': brandId,        // Send the brand ID
+          'csrfmiddlewaretoken': $("input[name='csrfmiddlewaretoken']").val(), // CSRF token
+        },
+        success: function (response) {
+          if (response.success) {
+            // If the deletion is successful, remove the deleted brand from the DOM
+            $(`#brand-${brandId}`).remove();  // Assuming each brand item has an id like "brand-1"
+            $('#deleteExistingBrand').modal('hide'); // Hide the modal
+            alert(response.message);  // Show success message
+          } else {
+            alert(response.error);    // Show error message
+          }
+        },
+        error: function () {
+          alert("There was an error while trying to delete the brand.");
+        }
+      });
+    });
 
     // When closing the modal
     $('#editExistingBrand').on('hidden.bs.modal', function () {
